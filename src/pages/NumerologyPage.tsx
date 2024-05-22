@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import MainLayout from '../layouts/MainLayout';
-import TextInput from '../components/TextInput';
-import Button from '../components/Button';
+import React, { useState } from "react";
+import MainLayout from "../layouts/MainLayout";
+import TextInput from "../components/TextInput";
+import Button from "../components/Button";
+import Typography from "../components/Typography";
 
 const NumerologyPage: React.FC = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
-    dateOfBirth: '',
+    fullName: "",
+    dateOfBirth: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -26,10 +27,10 @@ const NumerologyPage: React.FC = () => {
   return (
     <MainLayout>
       <section className="text-midnightBlue">
-        <h1 className="text-4xl font-heading mb-4">Discover Your Numerology Reading</h1>
-        <p className="text-lg font-body mb-6">
+        <Typography variant="h1">Discover Your Numerology Reading</Typography>
+        <Typography variant="p" className="text-lg mb-6">
           Numerology is the study of the mystical relationship between numbers and events. By analyzing the numbers in your life, you can gain insight into your personality, destiny, and life's purpose.
-        </p>
+        </Typography>
         <form onSubmit={handleSubmit} className="bg-crystalWhite p-6 rounded shadow-md">
           <TextInput
             label="Full Name"
