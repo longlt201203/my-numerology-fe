@@ -47,18 +47,32 @@ const NumerologyDataPage: React.FC = () => {
                 <Select label="Type" options={typeSelectOptions} />
                 <Select label="Number" options={numberSelectOptions} />
                 <TextArea label="Description" />
-                <Button>Add Entry</Button>
+                <Button>Update Entry</Button>
             </div>
             <hr className="my-6" />
 
             <Typography variant="h1" className="mb-6">Preview</Typography>
             <section>
-                {/* {entries.map((entry, index) => (
-<div key={index} className="mb-6">
-<h2 className="text-2xl font-secondary mb-2">Number {entry.number}:</h2>
-<p className="text-lg font-body mb-1"><strong>{entry.language}:</strong> {entry.description}</p>
-</div>
-))} */}
+                <Typography variant="h3">Life Path Number</Typography>
+                <div className=''>
+                    <Typography variant="h5">Number 1</Typography>
+                    <Typography variant="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae augue lectus. Cras tincidunt justo et lacinia interdum. Ut dictum orci vel orci tempus, et eleifend enim scelerisque. Maecenas rhoncus nisl a urna sollicitudin, vitae ultricies lorem lacinia. Pellentesque feugiat sit amet dolor vitae vestibulum. Nullam sit amet sapien vel massa pellentesque malesuada. Aliquam facilisis mollis leo, eget sodales velit lobortis sed. Phasellus congue velit vel nunc bibendum, eu hendrerit ex commodo. Vivamus vel sapien nibh. Donec lobortis interdum mauris eu luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti.</Typography>
+                </div>
+                <div className=''>
+                    <Typography variant="h5">Number 2</Typography>
+                    <Typography variant="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae augue lectus. Cras tincidunt justo et lacinia interdum. Ut dictum orci vel orci tempus, et eleifend enim scelerisque. Maecenas rhoncus nisl a urna sollicitudin, vitae ultricies lorem lacinia. Pellentesque feugiat sit amet dolor vitae vestibulum. Nullam sit amet sapien vel massa pellentesque malesuada. Aliquam facilisis mollis leo, eget sodales velit lobortis sed. Phasellus congue velit vel nunc bibendum, eu hendrerit ex commodo. Vivamus vel sapien nibh. Donec lobortis interdum mauris eu luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti.</Typography>
+                </div>
+            </section>
+            <section>
+                <Typography variant="h3">Expression Number</Typography>
+                <div className=''>
+                    <Typography variant="h5">Number 1</Typography>
+                    <Typography variant="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae augue lectus. Cras tincidunt justo et lacinia interdum. Ut dictum orci vel orci tempus, et eleifend enim scelerisque. Maecenas rhoncus nisl a urna sollicitudin, vitae ultricies lorem lacinia. Pellentesque feugiat sit amet dolor vitae vestibulum. Nullam sit amet sapien vel massa pellentesque malesuada. Aliquam facilisis mollis leo, eget sodales velit lobortis sed. Phasellus congue velit vel nunc bibendum, eu hendrerit ex commodo. Vivamus vel sapien nibh. Donec lobortis interdum mauris eu luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti.</Typography>
+                </div>
+                <div className=''>
+                    <Typography variant="h5">Number 2</Typography>
+                    <Typography variant="p">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut vitae augue lectus. Cras tincidunt justo et lacinia interdum. Ut dictum orci vel orci tempus, et eleifend enim scelerisque. Maecenas rhoncus nisl a urna sollicitudin, vitae ultricies lorem lacinia. Pellentesque feugiat sit amet dolor vitae vestibulum. Nullam sit amet sapien vel massa pellentesque malesuada. Aliquam facilisis mollis leo, eget sodales velit lobortis sed. Phasellus congue velit vel nunc bibendum, eu hendrerit ex commodo. Vivamus vel sapien nibh. Donec lobortis interdum mauris eu luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Suspendisse potenti.</Typography>
+                </div>
             </section>
         </AdminLayout>
     );
