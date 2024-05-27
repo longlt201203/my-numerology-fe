@@ -2,9 +2,9 @@ import React from 'react';
 
 interface TextAreaProps {
   label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  name?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   className?: string;
 }
 

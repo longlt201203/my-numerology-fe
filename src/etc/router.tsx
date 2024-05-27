@@ -3,6 +3,8 @@ import NumerologyPage from "../pages/NumerologyPage";
 import ResultPage from "../pages/ResultPage";
 import NumerologyExplanationPage from "../pages/NumerologyExplanationPage";
 import LoginPage from "../pages/LoginPage";
+import DashboardPage from "../pages/Dashboard";
+import NumerologyDataPage from "../pages/NumerologyData";
 
 const router = createBrowserRouter([
     {
@@ -23,6 +25,14 @@ const router = createBrowserRouter([
             {
                 path: "/login",
                 element: <LoginPage/>
+            },
+            {
+                path: "/admin/dashboard",
+                element: <DashboardPage/>
+            },
+            {
+                path: "/admin/numerology-data",
+                element: <NumerologyDataPage/>
             }
         ]
     }

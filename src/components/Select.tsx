@@ -2,9 +2,9 @@ import React from 'react';
 
 interface SelectProps {
   label: string;
-  name: string;
-  value: string;
-  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  name?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   options: { value: string; label: string }[];
   className?: string;
 }
