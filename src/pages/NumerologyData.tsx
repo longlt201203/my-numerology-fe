@@ -6,20 +6,34 @@ import Button from '../components/Button';
 import NumerologyEntryDto from '../services/dto/numerology.dto';
 import NumerologyService from '../services/numerology.service';
 import Typography from '../components/Typography';
+import { LanguageService } from '../services/language.service';
+import { LanguageDto } from '../services/dto/language.dto';
 
 const NumerologyDataPage: React.FC = () => {
     const numerologyService = NumerologyService.getInstance();
+    const languageService = LanguageService.getInstance();
     const [entries, setEntries] = useState<NumerologyEntryDto[]>([]);
+    const [languages, setLanguages] = useState<LanguageDto[]>([]);
 
     const fetchEntries = async () => {
         const entries = await numerologyService.getEntries({});
-        console.log(entries);
+        // console.log(entries);
         setEntries(entries);
     }
 
+    const fetchLanguages = async () => {
+        const languages = await languageService.getLanguages();
+        setLanguages(languages);
+    }
+
     useEffect(() => {
+        fetchLanguages();
         fetchEntries();
     }, []);
+
+    useEffect(() => {
+
+    }, [languages]);
 
     const typeSelectOptions = [
         { label: "Life Path", value: "lifePath" },
@@ -33,17 +47,12 @@ const NumerologyDataPage: React.FC = () => {
         { label: "5", value: "5" },
     ]
 
-    const languageSelectOptions = [
-        { label: "Tiếng Việt", value: "vn" },
-        { label: "English", value: "en" },
-    ]
-
     return (
         <AdminLayout>
             <Typography variant="h1" className="mb-6">Numerology Data</Typography>
 
             <div className=''>
-                <Select label="Language" options={languageSelectOptions} />
+                <Select label="Language" options={languages.map((item) => ({ label: item.name, value: item.code }))} />
                 <Select label="Type" options={typeSelectOptions} />
                 <Select label="Number" options={numberSelectOptions} />
                 <TextArea label="Description" />
