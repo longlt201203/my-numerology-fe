@@ -3,8 +3,10 @@ import MainLayout from '../layouts/MainLayout';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
+import AuthService from '../services/auth.service';
 
 const LoginPage: React.FC = () => {
+  const authService = AuthService.getInstance();
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -23,6 +25,11 @@ const LoginPage: React.FC = () => {
     console.log(formData);
     // Handle login logic here
   };
+
+  const handleLoginGoogle = async () => {
+    const uri = await authService.getAuthUri({ provider: "google", callbackMode: "login" });
+    window.location.href = uri;
+  }
 
   return (
     <MainLayout>
@@ -47,6 +54,9 @@ const LoginPage: React.FC = () => {
             Login
           </Button>
         </form>
+        <div className='mt-6 flex justify-center'>
+          <Button variant='primary' onClick={handleLoginGoogle}>Login With Google</Button>
+        </div>
         <p className="text-center mt-4">
           Don't have an account?{' '}
           <a href="/register" className="text-deepPurple hover:text-lavender">

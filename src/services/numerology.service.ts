@@ -19,4 +19,9 @@ export default class NumerologyService extends Service {
         if (query.lang) apiUri.searchParams.set("lang", query.lang);
         return this.get<NumerologyEntryDto[]>(apiUri.toString());
     }
+
+    updateOrCreateEntry(entry: NumerologyEntryDto) {
+        const apiUri = this.getApiUri("/update-or-create-entry");
+        return this.put<NumerologyEntryDto>(apiUri.toString(), entry);
+    }
 }

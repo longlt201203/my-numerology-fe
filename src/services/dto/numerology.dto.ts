@@ -4,4 +4,5 @@ export default class NumerologyEntryDto {
     number: number;
     lang: string;
     content: string;
+    summary: string;
 }

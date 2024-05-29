@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+import ApiResponseDto from "./dto/api-response.dto";
 
 export default class Service {
     constructor(
@@ -10,7 +11,12 @@ export default class Service {
     }
 
     async get<T>(uri: string, config?: AxiosRequestConfig) {
-        const response = await axios.get<T>(uri, config);
-        return response.data;
+        const response = await axios.get<ApiResponseDto<T>>(uri, config);
+        return response.data.data;
+    }
+
+    async put<T>(uri: string, data: any, config?: AxiosRequestConfig) {
+        const response = await axios.put<ApiResponseDto<T>>(uri, data, config);
+        return response.data.data;
     }
 }
