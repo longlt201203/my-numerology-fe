@@ -1,14 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
-import NumerologyPage from "../pages/NumerologyPage";
-import ResultPage from "../pages/ResultPage";
-import NumerologyExplanationPage from "../pages/NumerologyExplanationPage";
-import LoginPage from "../pages/LoginPage";
-import DashboardPage from "../pages/Dashboard";
-import NumerologyDataPage from "../pages/NumerologyData";
+import NumerologyPage from "../pages/main/NumerologyPage";
+import ResultPage from "../pages/main/ResultPage";
+import NumerologyExplanationPage from "../pages/main/NumerologyExplanationPage";
+import LoginPage from "../pages/main/LoginPage";
+import DashboardPage from "../pages/admin/Dashboard";
+import NumerologyDataPage from "../pages/admin/NumerologyData";
+import NumerologyMeaning from "../pages/admin/NumerologyMeaning";
+import MainLayout from "../layouts/MainLayout";
+import AdminLayout from "../layouts/AdminLayout";
 
 const router = createBrowserRouter([
     {
         path: "/",
+        element: <MainLayout/>,
         children: [
             {
                 path: "/",
@@ -26,6 +30,12 @@ const router = createBrowserRouter([
                 path: "/login",
                 element: <LoginPage/>
             },
+        ],
+    },
+    {
+        path: "/admin",
+        element: <AdminLayout/>,
+        children: [
             {
                 path: "/admin/dashboard",
                 element: <DashboardPage/>
@@ -33,6 +43,10 @@ const router = createBrowserRouter([
             {
                 path: "/admin/numerology-data",
                 element: <NumerologyDataPage/>
+            },
+            {
+                path: "/admin/numerology-meaning",
+                element: <NumerologyMeaning/>
             }
         ]
     }

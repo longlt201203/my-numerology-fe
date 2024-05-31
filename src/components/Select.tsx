@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface SelectProps {
-  label: string;
+  label?: string;
   name?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLSelectElement>) => void;
@@ -12,9 +12,11 @@ interface SelectProps {
 const Select: React.FC<SelectProps> = ({ label, name, value, onChange, options, className = '' }) => {
   return (
     <div className={`mb-4 ${className}`}>
-      <label htmlFor={name} className="block text-midnightBlue font-medium mb-1">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={name} className="block text-midnightBlue font-medium mb-1">
+          {label}
+        </label>
+      )}
       <select
         name={name}
         id={name}

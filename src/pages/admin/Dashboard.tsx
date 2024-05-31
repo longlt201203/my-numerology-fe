@@ -1,9 +1,8 @@
 import React from 'react';
-import AdminLayout from '../layouts/AdminLayout';
 
 const DashboardPage: React.FC = () => {
   return (
-    <AdminLayout>
+    <>
       <h1 className="text-4xl font-heading text-midnightBlue mb-6">Dashboard</h1>
       <p className="text-lg font-body mb-6">
         Welcome to the Numerology Admin Dashboard. Here you can manage users, view reports, and configure settings for the application.
@@ -37,7 +36,7 @@ const DashboardPage: React.FC = () => {
           </button>
         </div>
       </div>
-    </AdminLayout>
+    </>
   );
 };
 

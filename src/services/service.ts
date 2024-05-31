@@ -6,8 +6,20 @@ export default class Service {
         protected readonly basePath: string
     ) {}
 
-    getApiUri(path: string) {
-        return new URL(import.meta.env.VITE_API_URI+this.basePath+path);
+    getApiUri(path: string, query?: any) {
+        const apiUri = new URL(import.meta.env.VITE_API_URI+this.basePath+path);
+        if (query) {
+            for (const key in query) {
+                if (Array.isArray(query[key])) {
+                    for (const item of query[key]) {
+                        apiUri.searchParams.append(key, item);
+                    }
+                } else {
+                    apiUri.searchParams.set(key, query[key]);
+                }
+            }
+        }
+        return apiUri;
     }
 
     async get<T>(uri: string, config?: AxiosRequestConfig) {

@@ -1,34 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import AdminLayout from '../layouts/AdminLayout';
-import Select from '../components/Select';
-import TextArea from '../components/TextArea';
-import Button from '../components/Button';
-import NumerologyEntryDto from '../services/dto/numerology.dto';
-import NumerologyService from '../services/numerology.service';
-import Typography from '../components/Typography';
-import { LanguageService } from '../services/language.service';
-import { LanguageDto } from '../services/dto/language.dto';
-import NumerologyDataDto from '../dto/numerology-data.dto';
+import Select from '../../components/Select';
+import TextArea from '../../components/TextArea';
+import Button from '../../components/Button';
+import NumerologyEntryDto from '../../services/dto/numerology.dto';
+import NumerologyService from '../../services/numerology.service';
+import Typography from '../../components/Typography';
+import { LanguageService } from '../../services/language.service';
+import { LanguageDto } from '../../services/dto/language.dto';
+import NumerologyDataDto from '../../dto/numerology-data.dto';
 import { toast } from 'react-toastify';
-import TextInput from '../components/TextInput';
-
-const numerologyTypeData = {
-    lifePath: { label: "Life Path", value: "lifePath" },
-    soulUrge: { label: "Soul Urge", value: "soulUrge" },
-    expression: { label: "Expression", value: "expression" },
-    personality: { label: "Personality", value: "personality" },
-    birthday: { label: "Birthday", value: "birthday" },
-    maturity: { label: "Maturity", value: "maturity" },
-    balance: { label: "Balance", value: "balance" },
-    challenge: { label: "Challenge", value: "challenge" },
-    pinnacle: { label: "Pinnacle", value: "pinnacle" },
-    hiddenPassion: { label: "Hidden Passion", value: "hiddenPassion" },
-    cornerstone: { label: "Cornerstone", value: "cornerstone" },
-    capstone: { label: "Capstone", value: "capstone" },
-    firstVowel: { label: "First Vowel", value: "firstVowel" },
-}
-
-const numerologyNumberData = [1,2,3,4,5,6,7,8,9,11,22,33];
+import TextInput from '../../components/TextInput';
+import { numerologyNumberData, numerologyTypeData } from '../../etc/constants';
 
 const NumerologyDataPage: React.FC = () => {
     const numerologyService = NumerologyService.getInstance();
@@ -36,6 +18,7 @@ const NumerologyDataPage: React.FC = () => {
     const [numerologyData, setNumerologyData] = useState<NumerologyDataDto>({});
     const [languages, setLanguages] = useState<LanguageDto[]>([]);
     const [currentLanguage, setCurrentLanguage] = useState<LanguageDto>();
+    const [currentEntryType, setCurrentEntryType] = useState(numerologyTypeData.lifePath.value);
     const [currentNumerologyEntry, setCurrentNumerologyEntry] = useState<NumerologyEntryDto>({
         type: numerologyTypeData.lifePath.value,
         number: numerologyNumberData[0],
@@ -45,15 +28,17 @@ const NumerologyDataPage: React.FC = () => {
     });
 
     const fetchEntries = async () => {
-        const entries = await numerologyService.getEntries({ lang: currentLanguage?.code || "vn" });
-        const data: NumerologyDataDto = {};
-        for (const entry of entries) {
-            if (!data[entry.type]) {
-                data[entry.type] = [];
+        if (currentLanguage) {
+            const entries = await numerologyService.getEntries({ lang: currentLanguage.code, type: currentEntryType });
+            const data: NumerologyDataDto = {};
+            for (const entry of entries) {
+                if (!data[entry.type]) {
+                    data[entry.type] = [];
+                }
+                data[entry.type].push(entry);
             }
-            data[entry.type].push(entry);
+            setNumerologyData(data);
         }
-        setNumerologyData(data);
     }
 
     const fetchLanguages = async () => {
@@ -71,7 +56,7 @@ const NumerologyDataPage: React.FC = () => {
 
     useEffect(() => {
         fetchEntries();
-    }, [currentLanguage]);
+    }, [currentLanguage, currentEntryType]);
 
     const typeSelectOptions = Object.values(numerologyTypeData);
 
@@ -83,6 +68,11 @@ const NumerologyDataPage: React.FC = () => {
             setCurrentLanguage(language);
             setCurrentNumerologyEntry({ ...currentNumerologyEntry, lang: language.code });
         }
+    }
+
+    const handleNumerologyEntryTypeChange = (value: string) => {
+        setCurrentEntryType(value);
+        setCurrentNumerologyEntry({ ...currentNumerologyEntry, type: value });
     }
 
     const updateOrCreateEntry = async () => {
@@ -102,12 +92,12 @@ const NumerologyDataPage: React.FC = () => {
     }
 
     return (
-        <AdminLayout>
+        <>
             <Typography variant="h1" className="mb-6">Numerology Data</Typography>
 
             <div className=''>
                 <Select label="Language" value={currentLanguage?.code} onChange={(e) => handleLanguageChange(e.target.value)} options={languages.map((item) => ({ label: item.name, value: item.code }))} />
-                <Select label="Type" options={typeSelectOptions} onChange={(e) => setCurrentNumerologyEntry({ ...currentNumerologyEntry, type: e.target.value })} value={currentNumerologyEntry.type} />
+                <Select label="Type" options={typeSelectOptions} onChange={(e) => handleNumerologyEntryTypeChange(e.target.value)} value={currentEntryType} />
                 <Select label="Number" options={numberSelectOptions} onChange={(e) => setCurrentNumerologyEntry({ ...currentNumerologyEntry, number: parseInt(e.target.value) })} value={currentNumerologyEntry.number.toString()} />
                 <TextInput label="Summary" type="text" onChange={(e) => setCurrentNumerologyEntry({ ...currentNumerologyEntry, summary: e.target.value })} value={currentNumerologyEntry.summary} />
                 <TextArea label="Description" onChange={(e) => setCurrentNumerologyEntry({ ...currentNumerologyEntry, content: e.target.value })} value={currentNumerologyEntry.content} />
@@ -116,7 +106,7 @@ const NumerologyDataPage: React.FC = () => {
             <hr className="my-6" />
 
             <Typography variant="h1" className="mb-6">Preview</Typography>
-            {Object.entries(numerologyTypeData).map(([key, val]) => (
+            {/* {Object.entries(numerologyTypeData).map(([key, val]) => (
                 <section key={key}>
                     <Typography variant="h3" className='font-bold'>{val.label} Number</Typography>
                     {numerologyData[key] && numerologyData[key].map((item) => (
@@ -126,8 +116,16 @@ const NumerologyDataPage: React.FC = () => {
                         </div>
                     ))}
                 </section>
-            ))}
-        </AdminLayout>
+            ))} */}
+            <section>
+                {numerologyData[currentEntryType] && numerologyData[currentEntryType].map((item) => (
+                    <div className='' key={item.id}>
+                        <Typography variant="h5" className='font-bold'>Number {item.number}: {item.summary}</Typography>
+                        {item.content.split("\n").map((item, index) => (<Typography key={index} variant="p">{item}</Typography>))}
+                    </div>
+                ))}
+            </section>
+        </>
     );
 };
 

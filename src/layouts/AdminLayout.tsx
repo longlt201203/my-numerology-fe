@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { ToastContainer, Zoom } from 'react-toastify';
+import AdminProvider from '../providers/AdminProvider';
 
-interface AdminLayoutProps {
-  children: React.ReactNode;
-}
+const AdminLayout: React.FC = () => {
+  const handleLogout = () => {
+    window.location.href = import.meta.env.VITE_LOGOUT_URI;
+  }
 
-const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
   return (
-    <>
+    <AdminProvider>
       <ToastContainer
         position="top-center"
         autoClose={3000}
@@ -35,6 +36,9 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
                 <Link to="/admin/numerology-data">Numerology Data</Link>
               </li>
               <li className="p-4 hover:bg-lavender">
+                <Link to="/admin/numerology-meaning">Numerology Meaning</Link>
+              </li>
+              <li className="p-4 hover:bg-lavender">
                 <Link to="/admin/users">Manage Users</Link>
               </li>
               <li className="p-4 hover:bg-lavender">
@@ -46,7 +50,7 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             </ul>
           </nav>
           <footer className="p-4">
-            <button className="w-full bg-midnightBlue hover:bg-lavender text-crystalWhite py-2 rounded">
+            <button className="w-full bg-midnightBlue hover:bg-lavender text-crystalWhite py-2 rounded" onClick={handleLogout}>
               Logout
             </button>
           </footer>
@@ -56,11 +60,11 @@ const AdminLayout: React.FC<AdminLayoutProps> = ({ children }) => {
             <div className="container mx-auto">Welcome to the Admin Dashboard</div>
           </header>
           <main className="flex-grow container mx-auto p-6 bg-crystalWhite">
-            {children}
+            <Outlet/>
           </main>
         </div>
       </div>
-    </>
+    </AdminProvider>
 
   );
 };

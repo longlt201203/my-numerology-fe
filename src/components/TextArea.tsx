@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface TextAreaProps {
-  label: string;
+  label?: string;
   name?: string;
   value?: string;
   onChange?: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -11,9 +11,11 @@ interface TextAreaProps {
 const TextArea: React.FC<TextAreaProps> = ({ label, name, value, onChange, className = '' }) => {
   return (
     <div className={`mb-4 ${className}`}>
-      <label htmlFor={name} className="block text-midnightBlue font-medium mb-1">
-        {label}
-      </label>
+      {label && (
+        <label htmlFor={name} className="block text-midnightBlue font-medium mb-1">
+          {label}
+        </label>
+      )}
       <textarea
         name={name}
         id={name}
