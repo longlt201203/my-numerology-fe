@@ -1,5 +1,5 @@
 import { PropsWithChildren, useEffect, useState } from "react";
-import LanguageContext from "../contexts/LanguageContext";
+import LanguageContext from "../contexts/language.context";
 import { LanguageDto } from "../services/dto/language.dto";
 import { LanguageService } from "../services/language.service";
 

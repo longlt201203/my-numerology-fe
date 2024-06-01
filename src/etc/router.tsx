@@ -8,6 +8,10 @@ import NumerologyDataPage from "../pages/admin/NumerologyData";
 import NumerologyMeaning from "../pages/admin/NumerologyMeaning";
 import MainLayout from "../layouts/MainLayout";
 import AdminLayout from "../layouts/AdminLayout";
+import AuthLogin from "../pages/main/AuthLogin";
+import AuthSignUp from "../pages/main/AuthSignUp";
+import AuthRoute from "../pages/AuthRoute";
+import NumerologyNumber from "../pages/admin/NumerologyNumber";
 
 const router = createBrowserRouter([
     {
@@ -15,38 +19,60 @@ const router = createBrowserRouter([
         element: <MainLayout/>,
         children: [
             {
-                path: "/",
+                path: "",
                 element: <NumerologyPage/>
             },
             {
-                path: "/result",
+                path: "result",
                 element: <ResultPage/>
             },
             {
-                path: "/explain",
+                path: "explain",
                 element: <NumerologyExplanationPage/>
             },
             {
-                path: "/login",
+                path: "login",
                 element: <LoginPage/>
             },
         ],
     },
     {
-        path: "/admin",
-        element: <AdminLayout/>,
+        element: <AuthRoute/>,
         children: [
             {
-                path: "/admin/dashboard",
-                element: <DashboardPage/>
+                path: "/admin",
+                element: <AdminLayout/>,
+                children: [
+                    {
+                        path: "dashboard",
+                        element: <DashboardPage/>
+                    },
+                    {
+                        path: "numerology-data",
+                        element: <NumerologyDataPage/>
+                    },
+                    {
+                        path: "numerology-meaning",
+                        element: <NumerologyMeaning/>
+                    },
+                    {
+                        path: "numerology-number",
+                        element: <NumerologyNumber/>
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        path: "/auth",
+        children: [
+            {
+                path: "login",
+                element: <AuthLogin/>
             },
             {
-                path: "/admin/numerology-data",
-                element: <NumerologyDataPage/>
-            },
-            {
-                path: "/admin/numerology-meaning",
-                element: <NumerologyMeaning/>
+                path: "sign-up",
+                element: <AuthSignUp/>
             }
         ]
     }

@@ -5,7 +5,8 @@ import AdminProvider from '../providers/AdminProvider';
 
 const AdminLayout: React.FC = () => {
   const handleLogout = () => {
-    window.location.href = import.meta.env.VITE_LOGOUT_URI;
+    localStorage.removeItem("accessToken");
+    window.location.href = "/login";
   }
 
   return (
@@ -37,6 +38,9 @@ const AdminLayout: React.FC = () => {
               </li>
               <li className="p-4 hover:bg-lavender">
                 <Link to="/admin/numerology-meaning">Numerology Meaning</Link>
+              </li>
+              <li className="p-4 hover:bg-lavender">
+                <Link to="/admin/numerology-number">Numerology Number</Link>
               </li>
               <li className="p-4 hover:bg-lavender">
                 <Link to="/admin/users">Manage Users</Link>

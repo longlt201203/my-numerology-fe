@@ -7,7 +7,7 @@ export default class Service {
     ) {}
 
     getApiUri(path: string, query?: any) {
-        const apiUri = new URL(import.meta.env.VITE_API_URI+this.basePath+path);
+        const apiUri = new URL(import.meta.env.VITE_API_URI + this.basePath + path);
         if (query) {
             for (const key in query) {
                 if (Array.isArray(query[key])) {
@@ -23,11 +23,17 @@ export default class Service {
     }
 
     async get<T>(uri: string, config?: AxiosRequestConfig) {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!config) config = {};
+        if (accessToken) config.headers = { ...config.headers, Authorization: `Bearer ${accessToken}` };
         const response = await axios.get<ApiResponseDto<T>>(uri, config);
         return response.data.data;
     }
 
     async put<T>(uri: string, data: any, config?: AxiosRequestConfig) {
+        const accessToken = localStorage.getItem("accessToken");
+        if (!config) config = {};
+        if (accessToken) config.headers = { ...config.headers, Authorization: `Bearer ${accessToken}` };
         const response = await axios.put<ApiResponseDto<T>>(uri, data, config);
         return response.data.data;
     }
