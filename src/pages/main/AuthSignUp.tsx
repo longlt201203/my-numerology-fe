@@ -4,7 +4,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 
 export default function AuthSignUp() {
     const authService = AuthService.getInstance();
-    const [params, setParams] = useSearchParams();
+    const [params] = useSearchParams();
     const navigate = useNavigate();
 
     useEffect(() => {

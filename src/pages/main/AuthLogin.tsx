@@ -1,10 +1,10 @@
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import AuthService from "../../services/auth.service";
 import { useEffect } from "react";
 
 export default function AuthLogin() {
     const authService = AuthService.getInstance();
-    const [params, setParams] = useSearchParams();
+    const [params] = useSearchParams();
     const navigate = useNavigate();
 
     useEffect(() => {

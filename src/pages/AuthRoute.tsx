@@ -1,13 +1,13 @@
 import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
-import { AxiosError } from "axios";
+// import { AxiosError } from "axios";
 
-interface AuthRouteProps {
-    // role: string;
-}
+// interface AuthRouteProps {
+//     // role: string;
+// }
 
-export default function AuthRoute(props: AuthRouteProps) {
+export default function AuthRoute() {
     const authService = AuthService.getInstance();
     const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ export default function AuthRoute(props: AuthRouteProps) {
             const accessToken = localStorage.getItem("accessToken");
             if (accessToken) {
                 try {
-                    const profile = await authService.getProfile();
+                    await authService.getProfile();
                 } catch (err) {
                     // if (err instanceof AxiosError) {
 
