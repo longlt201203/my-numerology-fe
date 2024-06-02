@@ -9,9 +9,8 @@ import NumerologyMeaning from "../pages/admin/NumerologyMeaning";
 import MainLayout from "../layouts/MainLayout";
 import AdminLayout from "../layouts/AdminLayout";
 import AuthLogin from "../pages/main/AuthLogin";
-import AuthSignUp from "../pages/main/AuthSignUp";
+// import AuthSignUp from "../pages/main/AuthSignUp";
 import AuthRoute from "../pages/AuthRoute";
-import NumerologyNumber from "../pages/admin/NumerologyNumber";
 
 const router = createBrowserRouter([
     {
@@ -55,10 +54,6 @@ const router = createBrowserRouter([
                         path: "numerology-meaning",
                         element: <NumerologyMeaning/>
                     },
-                    {
-                        path: "numerology-number",
-                        element: <NumerologyNumber/>
-                    }
                 ]
             }
         ]
@@ -70,10 +65,10 @@ const router = createBrowserRouter([
                 path: "login",
                 element: <AuthLogin/>
             },
-            {
-                path: "sign-up",
-                element: <AuthSignUp/>
-            }
+            // {
+            //     path: "sign-up",
+            //     element: <AuthSignUp/>
+            // }
         ]
     }
 ])

@@ -40,9 +40,6 @@ const AdminLayout: React.FC = () => {
                 <Link to="/admin/numerology-meaning">Numerology Meaning</Link>
               </li>
               <li className="p-4 hover:bg-lavender">
-                <Link to="/admin/numerology-number">Numerology Number</Link>
-              </li>
-              <li className="p-4 hover:bg-lavender">
                 <Link to="/admin/users">Manage Users</Link>
               </li>
               <li className="p-4 hover:bg-lavender">
