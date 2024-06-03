@@ -8,6 +8,8 @@ import UpdateOrCreateCalculateExplainDto from "./dto/update-or-create-calculate-
 import NumerologyExplainDto from "./dto/numerology-explain.dto";
 import NumerologyCalculateExplainDto from "./dto/numerology-calculate-explain.dto";
 import SaveExplainDataDto from "./dto/save-explain-data.dto";
+import UpdateOrCreateNumberMeaningDto from "./dto/update-or-create-number-meaning.dto";
+import NumerologyNumberMeaningDto from "./dto/numerology-number-meaning.dto";
 
 export default class NumerologyService extends Service {
     private static instance: NumerologyService;
@@ -43,6 +45,11 @@ export default class NumerologyService extends Service {
     updateOrCreateCalculateExplain(dto: UpdateOrCreateCalculateExplainDto) {
         const apiUri = this.getApiUri("/update-or-create-calculate-explain");
         return this.put<NumerologyCalculateExplainDto>(apiUri.toString(), dto);
+    }
+
+    updateOrCreateNumberExplain(dto: UpdateOrCreateNumberMeaningDto) {
+        const apiUri = this.getApiUri("/update-or-create-number-explain");
+        return this.put<NumerologyNumberMeaningDto>(apiUri.toString(), dto);
     }
 
     saveExplainData(dto: SaveExplainDataDto) {
