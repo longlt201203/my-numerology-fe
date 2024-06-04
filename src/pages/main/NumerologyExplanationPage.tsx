@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Typography from '../../components/Typography';
 import useLanguage from '../../hooks/useLanguage';
 import NumerologyService from '../../services/numerology.service';
-import { numerologyExplainTypeData, numerologyTypeData } from '../../etc/constants';
+import { numerologyExplainTypeData, numerologyNumberData, numerologyTypeData } from '../../etc/constants';
 
 const NumerologyExplanationPage: React.FC = () => {
   const { currentLanguage } = useLanguage();
@@ -10,6 +10,7 @@ const NumerologyExplanationPage: React.FC = () => {
 
   const [explainContent, setExplainContent] = useState<{ [key: string]: string }>({});
   const [calculateExplainContent, setCalculateExplainContent] = useState<{ [key: string]: string }>({});
+  const [numberMeaningContent, setNumberMeaningContent] = useState<{ [key: number]: string }>({});
 
   const fetchExplainData = async () => {
     if (currentLanguage) {
@@ -28,6 +29,13 @@ const NumerologyExplanationPage: React.FC = () => {
         data[item.type] = item.content;
       }
       setCalculateExplainContent(data);
+
+      // explainData.numerologyMeaningList
+      data = {};
+      for (const item of explainData.numerologyMeaningList) {
+        data[item.number] = item.content;
+      }
+      setNumberMeaningContent(data);
     }
   }
 
@@ -49,7 +57,7 @@ const NumerologyExplanationPage: React.FC = () => {
         <p className="text-lg font-body mb-4">{explainContent[numerologyExplainTypeData.history.value]}</p>
       </section>
 
-      <section className="mb-6">
+      {/* <section className="mb-6">
         <h2 className="text-3xl font-secondary mb-4">Core Numerology Concepts</h2>
         <h3 className="text-2xl font-secondary mb-2">Life Path Number</h3>
         <p className="text-lg font-body mb-4">
@@ -70,7 +78,7 @@ const NumerologyExplanationPage: React.FC = () => {
         <p className="text-lg font-body mb-4">
           The Personality Number is derived from the consonants in your name. It represents the aspects of your personality that you show to the outside world and how others perceive you.
         </p>
-      </section>
+      </section> */}
 
       <section className="mb-6">
         <h2 className="text-3xl font-secondary mb-4">How to Calculate Your Numbers</h2>
@@ -88,6 +96,17 @@ const NumerologyExplanationPage: React.FC = () => {
         <p className="text-lg font-body">
           Remember, numerology is a tool for self-discovery and personal growth. Use it to gain insights and guide your decisions, but always follow your intuition and inner wisdom.
         </p>
+      </section>
+
+      <section>
+        <Typography variant='h2'>Number Meaning</Typography>
+
+        {numerologyNumberData.map((item) => (
+          <div key={item}>
+            <Typography variant="h4">Number {item}</Typography>
+            <Typography variant="p">{numberMeaningContent[item]}</Typography>
+          </div>
+        ))}
       </section>
 
       <section>
